@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1700830354 source:z:\cpp\project\krit3\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+
