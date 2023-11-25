@@ -27,7 +27,7 @@
 *.lib
 
 # Executables
-*.exe
+/*.exe
 *.out
 *.app
 
@@ -35,5 +35,5 @@
 *.layout
 *.depend
 # generated directories
-bin/
-obj/
+/bin/
+/obj/
