@@ -3,18 +3,19 @@
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
+#include <string>
 
 using namespace std;
 
 const string letters = "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäå¸æçèéêëìíîïğñòóôõö÷øùúûüışÿ";
-const string gl = "áïâôäòçñæø÷öùãêõìíëğ";
+const string sogl = "áïâôäòçñæø÷öùãêõìíëğ";
 
 bool is_gl(char c) {
-    return gl.find(tolower(c)) != gl.npos;
+    return letters.find(c) != letters.npos && sogl.find(tolower(c)) == sogl.npos;
 }
 
 bool is_sogl(char c) {
-    return letters.find(c) != letters.npos && !is_gl(c);
+    return letters.find(c) != letters.npos && sogl.find(tolower(c)) != sogl.npos;
 }
 
 bool is_word(string word) {
@@ -92,24 +93,22 @@ void solve(int text_number) {
     }
     fout << "----------------------------------------------------------" << endl;
     int pairs_count = 0;
-    for (int i = 0; i < words.size(); i++) {
-
-        for (int j = i + 1; j < words.size(); j++) {
-            int ending = check_end(words[i]), begining = check_begin(words[j]);
-            if (ending >= 2 && begining >= 2) {
-                fout << "WTF: " << words[i] << ' ' << words[j] << ": " << ending << ' ' << begining << endl;
-                pairs_count++;
-            }
+    for (int i = 1; i < words.size(); i++)
+    {
+        int ending = check_end(words[i - 1]), begining = check_begin(words[i]);
+        if ((ending == 2 || ending == 3) && (begining == 2 || begining == 3)) {
+            fout << "WTF: " << words[i - 1] << ' ' << words[i] << ": " << ending << ' ' << begining << endl;
+            pairs_count++;
         }
     }
 
     fout.close();
 
-    if (words.size() <= 1) {
+    if (words.size() == 0) {
         cout << "There is no words!!";
         return;
     }
-    cout << "Result: " << fixed << setprecision(6) << 1.0 * pairs_count / (words.size() - 1) << endl;
+    cout << "Result: " << fixed << setprecision(6) << 1.0 * pairs_count / words.size() << endl;
 
 }
 
