@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1700830297 source:z:\cpp\2023_11_24 proj\1a\main.cpp
+	<iostream>
+	<windows.h>
+	<fstream>
+	<map>
+	<algorithm>
+	<vector>
+
